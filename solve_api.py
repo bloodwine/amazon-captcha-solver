@@ -2,14 +2,7 @@ import os, datetime, time
 from flask import Flask, request, jsonify
 from solve_captcha_with_model import CaptchaSolver
 
-image_file_path = "/home/webspider/hrn/projects/amazon-captcha-solver-main"
-
-run_date = datetime.datetime.strptime("2021-01-05", "%Y-%m-%d")
-today = datetime.datetime.strptime(time.strftime("%Y-%m-%d"), "%Y-%m-%d")
-
-if today != run_date:
-    print("Date mismatch!")
-    exit()
+image_file_path = "./"
 
 app = Flask(__name__)
 captchaSolver = CaptchaSolver()
@@ -21,13 +14,11 @@ def health_check():
     """Confirms service is running"""
     return "Captcha solver service is up and running."
 
-
 @app.route('/solve', methods=["POST"])
 def solve_captcha():
     img = request.files['captcha']
     if img.filename != '':
         img.filename = 'test.jpg'
-        time.sleep(2)
         img.save(os.path.join(image_file_path, img.filename))
         captcha_output = captchaSolver.solve()
     else:

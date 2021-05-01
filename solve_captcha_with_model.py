@@ -9,9 +9,9 @@ import tensorflow as tf
 
 class CaptchaSolver:
     def __init__(self):
-        self.MODEL_FILENAME = "/home/webspider/hrn/projects/amazon-captcha-solver-main/amz_captcha_model.hdf5"
-        self.MODEL_LABELS_FILENAME = "/home/webspider/hrn/projects/amazon-captcha-solver-main/amz_captcha_model_labels.dat"
-        self.IMAGE_FILE = "/home/webspider/hrn/projects/amazon-captcha-solver-main/test.jpg"
+        self.MODEL_FILENAME = "amz_captcha_model.hdf5"
+        self.MODEL_LABELS_FILENAME = "amz_captcha_model_labels.dat"
+        self.IMAGE_FILE = "./test.jpg"
 
 
     def solve(self):
@@ -22,7 +22,7 @@ class CaptchaSolver:
         # Load the trained neural network
         model = load_model(self.MODEL_FILENAME)
 
-        tf.compat.v1.disable_eager_execution()
+        #tf.compat.v1.disable_eager_execution()
 
         try:
             # Load the image and convert it to grayscale
